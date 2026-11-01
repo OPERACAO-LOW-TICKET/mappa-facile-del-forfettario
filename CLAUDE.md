@@ -8,6 +8,7 @@
 Nunca pular etapas nem mudar a ordem.
 
 ## Dados fixos
+- Produção: https://mappa-facile-del-forfettario.vercel.app (Vercel, projeto `mappa-facile-del-forfettario` em artthur23's projects; deploy automático a cada push em `main`).
 - Checkout Hotmart: Piano Completo `L108289087H` (16,90 €), Piano Base `K108289138P` (10,90 €).
 - Meta Pixel `1833382634562651`: PageView + ViewContent.
 - Texto da página em italiano; garantia de 7 dias.
