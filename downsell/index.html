@@ -108,13 +108,14 @@ fbq('init','1833382634562651');fbq('track','PageView');fbq('track','ViewContent'
 <img class="mock" src="/downsell/img/express.webp?v=2" width="672" height="1100" alt="Tutele INPS Express" fetchpriority="high" style="max-width:300px;margin:16px auto 4px">
 <div class="price"><span class="now"><sup>€</sup>9,90</span><small><b>Pagamento unico</b>offerta di questa pagina</small></div>
 <div class="btnz"><div><div class="hm-card">
-<div class="hm-head"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>Aggiungila al mio ordine</div>
+<div class="hm-head" id="hmh"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>Aggiungila al mio ordine</div>
 <!-- ===== HOTMART · pulsanti 1 clic (Strumenti › Funnel di vendita › codice del widget di questa fase). Se il codice della Hotmart è diverso, incollalo qui. ===== -->
 <div id="hotmart-sales-funnel"></div>
 <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
 <script>try{checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');}catch(e){}</script>
 <!-- ===== FINE HOTMART ===== -->
 <div class="pv" id="pv"><a href="#" role="button">✅ Sì, aggiungi Tutele INPS Express (9,90 €)</a><a href="#" class="no">No grazie, vai al mio acquisto</a><small>Anteprima: sul sito questi pulsanti sono sostituiti da quelli a 1 clic della Hotmart.</small></div>
+<div class="pv" id="fbk"><a href="https://pay.hotmart.com/V108358233E?checkoutMode=10" id="fbk-a">Acquista Tutele INPS Express <span style="white-space:nowrap">· 9,90 €</span></a><small>Pagamento sicuro con Hotmart · garanzia di 7 giorni</small></div>
 </div></div></div>
 <p class="legal">Premendo «Sì» accetti l'acquisto con <b>obbligo di pagamento di 9,90 €</b>, addebitati sullo stesso metodo di pagamento dell'ordine. Nessun abbonamento. Accesso immediato e <b>garanzia di rimborso di 7 giorni</b>.</p>
 <div class="trust"><span><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Si legge in 10 minuti</span><span><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Garanzia 7 giorni</span></div>
@@ -131,6 +132,9 @@ const HM_CROP_TOP = 0, HM_VISIBLE = 0;
 const fix=()=>box.querySelectorAll('iframe').forEach(f=>{f.setAttribute('scrolling','no');f.setAttribute('title','Pagamento Hotmart');});new MutationObserver(fix).observe(box,{childList:true,subtree:true});
 const preview=location.protocol==='file:'||/claudeusercontent|localhost|preview/.test(location.hostname)||new URLSearchParams(location.search).has('anteprima');
 if(preview){document.getElementById('pv').style.display='block';box.style.display='none';}})();
+
+/* Il widget Hotmart funziona solo con i parametri dell'acquisto in corso (aggiunti dalla Hotmart all'URL dopo il checkout). Visita diretta senza quei parametri: si nasconde il widget e compare il link di pagamento normale. */
+(function(){const pv=location.protocol==='file:'||/claudeusercontent|localhost|preview/.test(location.hostname)||new URLSearchParams(location.search).has('anteprima');if(pv)return;const keys=[...new URLSearchParams(location.search).keys()].filter(k=>!/^(utm_|fbclid$|gclid$|ttclid$)/.test(k));if(keys.length)return;document.getElementById('hotmart-sales-funnel').style.display='none';document.getElementById('fbk').style.display='block';const hd=document.getElementById('hmh');if(hd)hd.lastChild.textContent='Acquistala ora';if(window.top!==window.self)document.getElementById('fbk-a').target='_blank';})();
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const cnt=document.getElementById('cnt');const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
 if(cnt){const end=+cnt.dataset.end,t0=performance.now(),d=1500;document.querySelectorAll('.bar span i').forEach(i=>setTimeout(()=>{i.style.width=i.dataset.w},250));
